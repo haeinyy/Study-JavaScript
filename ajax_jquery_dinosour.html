@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- src import https://code.jquery.com/  -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <script>
+        // ajax로 데이터를 가져오는 것은 한정적이다!!
+        // 자신의 팀안 서버에서의 데이터를 가져와서 쓸때에 사용하지..
+        // 다른 사이트의 데이터를 가져오는데에 사용하기 애매함..ㅠㅠ
+        // cors1과 cors2의 차이
+        $.ajax({
+            // url: "http://ggoreb.com/ajax/cors1.jsp",
+            url: "http://ggoreb.com/ajax/cors2.jsp",
+            //url: "http://ggoreb.com/dinosaur/info.jsp",
+            success: function(result) { // result -> list형
+                // 가져온 데이터 전체 출력
+                console.log(result);
+           
+                // 전체 공룡 이름만 출력하기
+                // for (let obj of result){
+                //     // console.log(obj);
+                //     let dinosaurs = obj['dinosaurs']
+                //     for (let dinosaur of dinosaurs) {
+                //         let title = dinosaur['title']
+                //         console.log(title);
+                //     }
+                // }
+            }
+        })
+    </script>
+</body>
+</html>

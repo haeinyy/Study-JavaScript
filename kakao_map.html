@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Kakao 지도 시작하기</title>
+</head>
+
+<body>
+    <!-- 지도를 표시할 div -->
+    <div id="map" style="width:500px;height:400px;"></div>
+    <!-- 로드뷰를 표시할 div 입니다 -->
+    <div id="roadview" style="width:100%;height:300px;"></div>
+
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=77da5ae43762115ff56544bb583b833a"></script>
+    <script>
+        // 현재위치 위도,경도 가져오기
+        navigator.geolocation.getCurrentPosition(
+            function (position) {
+                console.log("위도 : " + position.coords.latitude);
+                console.log("경도 : " + position.coords.longitude);
+            },
+        );
+        const container = document.getElementById('map'); // 지도를 표시할 div
+        const options = {
+            //카카오본사
+            // center: new kakao.maps.LatLng(33.450701, 126.570667), // 위도 경도
+            // 우림라이온스밸리
+            center: new kakao.maps.LatLng(37.473083599999995, 126.8788276), // 위도 경도
+            level: 8 // 확대/축소 레벨
+        };
+
+        const map = new kakao.maps.Map(container, options); // 지도 생성
+
+        // 마커가 표시될 위치입니다 
+        const markerPosition = new kakao.maps.LatLng(37.473083599999995, 126.8788276);
+
+        // 마커를 생성합니다
+        const marker = new kakao.maps.Marker({
+            position: markerPosition
+        });
+
+        // 마커가 지도 위에 표시되도록 설정합니다
+        marker.setMap(map);
+
+
+        // 로드뷰
+        var roadviewContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
+        var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
+        var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+
+        var position = new kakao.maps.LatLng(37.473083599999995, 126.8788276);
+
+        // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+        roadviewClient.getNearestPanoId(position, 50, function (panoId) {
+            roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
+        });
+    </script>
+</body>
+
+</html>

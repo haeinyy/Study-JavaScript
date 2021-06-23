@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Shape {
+            constructor(width, height, color) {
+                this.width = width;
+                this.height = height;
+                this.color = color;
+            }
+            draw() {
+                console.log(`drawing ${this.color}`);
+            }
+            getArea() {
+                return this.width * this.height;
+            }
+        }
+        // 자식 클래스 생성
+        class Rectangel extends Shape {
+            
+        }
+        class Triangel extends Shape {
+
+        }
+
+        // 객체 생성
+        const r = new Rectangel(10,20,'Red');
+        const t = new Triangel(40,50,'Blue');
+        r.draw();
+        console.log(r.getArea());
+        r.draw();
+        console.log(t.getArea());
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const house = {
+            bathroom: 1,
+            room: 2,
+            address: ['제주도', '제주시', '연동'],
+            persons: [
+                { name: 'kim' },
+                { name: 'lee' }
+            ]
+        };
+
+        console.log(house);
+
+        // bathroom 삭제
+        delete house.bathroom;
+        console.log(house);
+
+        // animals 추가
+        house.animals = ['개','고양이'];
+        console.log(house);
+
+    </script>
+</body>
+
+</html>
