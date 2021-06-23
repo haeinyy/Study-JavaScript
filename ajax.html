@@ -1,0 +1,78 @@
+<!-- 
+ajax를 꼭 사용해야 하는 경우!
+현재의 동작에 영향을 안 끼치게 하는것!
+1. 아이디 중복검사
+2. 영상을 보다가 댓글달기, 좋아요 -->
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script>
+        const xmlHttp = new XMLHttpRequest();
+
+        function send() {
+            var url = "http://ggoreb.com/ajax/json/data3.jsp";
+            // 통신 상태에 따라 동작될 callback 함수 지정
+            xmlHttp.onreadystatechange = callback;
+            // http메소드, 요청주소, 비동기/동기 여부
+            xmlHttp.open("GET", url, true);
+            // POST 통신 시 파라미터 지정
+            // GET 통신 시 null
+            xmlHttp.send(null);
+        }
+
+        function callback() {
+            /* 
+                현재 xmlHttp 객체의 상태
+                0 ~ 4 까지의 값 존재
+                0(UNINITIALIZED) : 초기화 전
+                1(LOADING) : open 함수 호출
+                2(LOADED) : send 함수까지 호출했지만 서버로부터 응답이 도착하지 않음
+                3(INTERACTIVE) : 응답 데이터를 일부만 받음
+                4(COMPLETED) : 응답 데이터를 모두 받음(완료)
+            */
+            if (xmlHttp.readyState == 4) {
+
+                /* 
+                    서버와의 통신 후 결과 코드
+                    ex) 200(OK) : 통신 완료
+                        403(Forbidden) : 접근 거부
+                        404(Not Found) : 페이지 없음
+                        500(Internal Server Error) : 서버 오류
+                */
+                if (xmlHttp.status == 200) {
+                    temp = xmlHttp.responseText;
+                    
+                    // 받아온 내용 파싱하기
+                    temp = JSON.parse(temp);
+                    let name = temp[0]['name'];
+                    let age = temp[0]['age'];
+                    let html = `<table border='1'>\
+                        <tr>\
+                            <td>${name}</td>\
+                            <td>${age}</td>\
+                        </tr>\
+                    </table>`;
+
+                    // 받아온 내용물 화면에 추가
+                    document.querySelector('body').innerHTML += html
+
+
+                    // // 받아온 내용물 화면에 추가
+                    // t=`<h1>${temp}</h1>`
+                    // document.querySelector('body').innerHTML += t
+
+                    // alert(temp);
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <input type="button" value="요청" onclick="send()">
+</body>
+
+</html>

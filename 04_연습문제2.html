@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- js 함수 정의해보기 -->
+    <script>
+        class User {
+            constructor(firstName, lastName, age) {
+                this.firstName = firstName;
+                this.lastName = lastName;
+                this.age = age;
+            }
+
+            // set과 get은 꼭 쌍을 맞추어서 써야함!
+            // 간단한 캡슐화 : class의 진짜 변수값을 보호하겠다!
+            // => 따라서, set (변수 값을 외부에서 받아올때) 조건으로 걸러줌
+            set age(v) {
+                if (v < 0) {
+                    v = 0;
+                }
+                this._age = v
+            }
+
+            get age() {
+                return this._age
+            }
+        }
+
+        const user = new User('steve', 'Job', -1);
+        console.log(user.firstName)
+        console.log(user.age);
+
+    </script>
+</body>
+
+</html>
